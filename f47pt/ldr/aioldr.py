@@ -6,7 +6,7 @@ import itertools
 try:
     import RPi.GPIO as GPIO
 except:
-    from f47pt.gpiomock import GPIO
+    from f47pt.ldr.gpiomock import GPIO
 
 GPIO.setmode(GPIO.BOARD)
 

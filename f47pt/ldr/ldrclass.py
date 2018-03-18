@@ -7,11 +7,14 @@ Created on 2018-03-05 by hbldh <henrik.blidh@nedomkull.com>
 """
 
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 try:
     from RPi import GPIO
 except:
-    from f47pt.gpiomock import GPIO
+    from f47pt.ldr.gpiomock import GPIO
 
 
 class LDRMeasurer(object):
@@ -22,12 +25,12 @@ class LDRMeasurer(object):
         self.t_iteration = t_iteration
 
     def __enter__(self):
-        print("Running enter")
+        logger.debug("LDRMeasurer: Running enter")
         GPIO.setmode(GPIO.BOARD)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        print("Running exit")
+        logger.debug("LDRMeasurer: Running exit")
         GPIO.cleanup()
 
     def _setup(self):
