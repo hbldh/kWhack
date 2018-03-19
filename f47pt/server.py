@@ -20,16 +20,14 @@ def run_server(mongodb_uri, port=8888):
     collection = client['test']['mycoll']
 
     async def handle_connection(reader, writer):
-        while True:
-            data = await reader.read(100)
-            message = data.decode()
-            addr = writer.get_extra_info('peername')
-            doc = {'t': time.time(), 'v': message}
-            logger.debug("Received %r from %r" % (
-                str(message), addr))
-            result = await collection.insert_one(doc)
-            logger.debug("Inserted: %r as %r" % (
-                str(doc), str(result.inserted_id)))
+        data = await reader.read(100)
+        message = data.decode()
+        addr = writer.get_extra_info('peername')
+        doc = {'t': time.time(), 'v': message}
+        logger.debug("Received %r from %r" % (str(message), addr))
+        result = await collection.insert_one(doc)
+        logger.debug("Inserted: %r as %r" % (
+            str(doc), str(result.inserted_id)))
         writer.close()
 
     loop = asyncio.get_event_loop()

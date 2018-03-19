@@ -9,6 +9,7 @@ name = "pypi"
 
 motor = "*"
 dnspython = "*"
+pyzmq = "*"
 
 
 [dev-packages]
