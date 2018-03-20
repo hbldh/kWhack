@@ -1,10 +1,12 @@
 # kWhack
 
-Etymology: *Kilowatt hour acknowledge* or *kWh hack* 
+Etymology: *Kilowatt hour acknowledgment* or *kWh hack*. 
 
 A simple power consumption tracker running on a Raspberry Pi 
 and using a simple LDR rig connected to the GPIO pins.
 
+**This is a very much a project in development. Do not expect it to be 
+functional without a lot of work...**
 
 ## Installation
 

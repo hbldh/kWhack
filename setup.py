@@ -18,7 +18,7 @@ DESCRIPTION = 'A tiny power consumption tracker ' \
 URL = 'https://github.com/hbldh/kwhack'
 EMAIL = 'henrik.blidh@nedomkull.com'
 AUTHOR = 'Henrik Blidh'
-REQUIRES_PYTHON = '>=3.6.0'
+REQUIRES_PYTHON = '>=3.5.0'
 VERSION = None
 
 # What packages are required for this module to be executed?
@@ -110,9 +110,11 @@ setup(
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
+        'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
