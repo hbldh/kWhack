@@ -100,8 +100,8 @@ setup(
     packages=find_packages(exclude=('tests',)),
     entry_points={
         'console_scripts': [
-            'kWhack-client=kwhack.cli:run_client',
-            'kWhack-server=kwhack.cli:run_server',
+            'kWhack-client=kwhack.cli:cli_client',
+            'kWhack-server=kwhack.cli:cli_server',
         ],
     },
     install_requires=REQUIRED,
