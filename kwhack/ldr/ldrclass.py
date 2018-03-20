@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 try:
     from RPi import GPIO
 except:
-    from f47pt.ldr.gpiomock import GPIO
+    from kwhack.ldr.gpiomock import GPIO
 
 
 class LDRMeasurer(object):
