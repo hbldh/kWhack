@@ -19,7 +19,6 @@ def run_server(port):
     context = zmq.Context()
     socket = context.socket(zmq.PUB)
     socket.bind("tcp://*:%d" % port)
-
     while True:
         t = ldr.rc_time()
         logger.debug('Send: %r' % t)
@@ -28,10 +27,12 @@ def run_server(port):
 
 if __name__ == '__main__':
     import sys
+
     h = logging.StreamHandler(sys.stdout)
     logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s %(name)s: %(message)s',
-                                  datefmt='%Y-%m-%dT%H:%M:%S')
+    formatter = logging.Formatter(
+        '%(asctime)s %(name)s: %(message)s', datefmt='%Y-%m-%dT%H:%M:%S'
+    )
     h.setFormatter(formatter)
     logger.addHandler(h)
     run_server(5556)

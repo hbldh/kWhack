@@ -1,5 +1,4 @@
 #!/usr/local/bin/python
-
 import asyncio
 import itertools
 
@@ -7,7 +6,6 @@ try:
     import RPi.GPIO as GPIO
 except:
     from kwhack.ldr.gpiomock import GPIO
-
 GPIO.setmode(GPIO.BOARD)
 
 
@@ -22,21 +20,17 @@ async def check_pin(pin, t_iteration=0.01):
     return GPIO.input(pin) == GPIO.LOW
 
 
-async def ldr_async(pin,  t_setup=0.025, t_iteration=0.05):
+async def ldr_async(pin, t_setup=0.025, t_iteration=0.05):
     count = 0
-
     # Output on the pin for
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
     await asyncio.sleep(t_setup)
-
     # Change the pin back to input
     GPIO.setup(pin, GPIO.IN)
-
     # Count until the pin goes high
     while await check_pin(pin, t_iteration):
         count += 1
-
     return count
 
 

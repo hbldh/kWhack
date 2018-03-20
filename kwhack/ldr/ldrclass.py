@@ -10,7 +10,6 @@ import time
 import logging
 
 logger = logging.getLogger(__name__)
-
 try:
     from RPi import GPIO
 except:
@@ -38,18 +37,15 @@ class LDRMeasurer(object):
         GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.LOW)
         time.sleep(0.025)
-
         # Change the pin back to input
         GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     def rc_time(self):
         self._setup()
-
         # Count until the pin goes high
         count = 0
         while GPIO.input(self.pin) == GPIO.LOW:
             count += 1
-
         return count
 
     def rc_time_with_sleep(self):
@@ -58,14 +54,14 @@ class LDRMeasurer(object):
         t = time.time()
         while GPIO.input(self.pin) == GPIO.LOW:
             time.sleep(self.t_iteration)
-
         return time.time() - t
 
     def rc_time_edge(self):
         self._setup()
         t = time.time()
         edge = GPIO.wait_for_edge(
-            self.pin, GPIO.RISING, timeout=int(self.t_iteration*1000))
+            self.pin, GPIO.RISING, timeout=int(self.t_iteration * 1000)
+        )
         return edge, time.time() - t
 
 

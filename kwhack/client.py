@@ -30,11 +30,9 @@ def run_client(mongodb_uri, port):
     #  Socket to talk to server
     context = zmq.Context()
     socket = context.socket(zmq.SUB)
-
     logger.debug("Collecting updates from LDR server...")
     socket.connect("tcp://localhost:%d" % port)
     socket.setsockopt_string(zmq.SUBSCRIBE, '')
-
     # Process 5 updates
     for update_nbr in range(5):
         s = socket.recv_string()
@@ -44,10 +42,12 @@ def run_client(mongodb_uri, port):
 
 if __name__ == '__main__':
     import sys
+
     h = logging.StreamHandler(sys.stdout)
     logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s %(name)s: %(message)s',
-                                  datefmt='%Y-%m-%dT%H:%M:%S')
+    formatter = logging.Formatter(
+        '%(asctime)s %(name)s: %(message)s', datefmt='%Y-%m-%dT%H:%M:%S'
+    )
     h.setFormatter(formatter)
     logger.addHandler(h)
     run_client(os.environ.get('MONGODB_URI'), port=5556)
