@@ -6,10 +6,10 @@ Created on 2018-03-19 by hbldh <henrik.blidh@nedomkull.com>
 
 """
 import os
-import sys
 import time
 import logging
 import asyncio
+from urllib.parse import urlsplit
 
 import zmq
 
@@ -20,7 +20,8 @@ logger = logging.getLogger(__name__)
 
 def run_client(mongodb_uri, port):
     client = AsyncIOMotorClient(mongodb_uri)
-    collection = client['test']['mycoll']
+    db_name = urlsplit(mongodb_uri).path.strip('/')
+    collection = client[db_name]['blips']
     loop = asyncio.get_event_loop()
 
     async def store_blink(t):
@@ -33,8 +34,7 @@ def run_client(mongodb_uri, port):
     logger.debug("Collecting updates from LDR server...")
     socket.connect("tcp://localhost:%d" % port)
     socket.setsockopt_string(zmq.SUBSCRIBE, '')
-    # Process 5 updates
-    for update_nbr in range(5):
+    while True:
         s = socket.recv_string()
         logger.debug("Received %r" % s)
         loop.run_until_complete(store_blink(s))
