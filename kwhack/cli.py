@@ -21,7 +21,7 @@ def cli_client():
     parser = argparse.ArgumentParser(
         description='Power consumption tracker client'
     )
-    parser.add_argument('p', '--port', default=8888)
+    parser.add_argument('-p', '--port', default=8888)
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--output', type=str, default='-')
     args = parser.parse_args()
@@ -45,7 +45,7 @@ def cli_server():
     parser = argparse.ArgumentParser(
         description='Power consumption tracker server'
     )
-    parser.add_argument('p', '--port', default=8888)
+    parser.add_argument('-p', '--port', default=8888)
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--output', type=str, default='-')
     args = parser.parse_args()
