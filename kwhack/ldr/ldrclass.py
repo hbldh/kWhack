@@ -33,7 +33,8 @@ class LDRMeasurer(object):
         GPIO.cleanup()
 
     def _setup(self):
-        # Output on the pin for
+        GPIO.setmode(GPIO.BOARD)
+        # Output on the pin
         GPIO.setup(self.pin, GPIO.OUT)
         GPIO.output(self.pin, GPIO.LOW)
         time.sleep(0.025)

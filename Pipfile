@@ -10,7 +10,7 @@ name = "pypi"
 motor = "*"
 dnspython = "*"
 pyzmq = "*"
-
+RPi.GPIO = ">=0.6.3"
 
 [dev-packages]
 

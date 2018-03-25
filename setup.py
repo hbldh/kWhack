@@ -25,7 +25,8 @@ VERSION = None
 REQUIRED = [
     'motor',
     'dnspython',
-    'pyzmq'
+    'pyzmq',
+    'RPi.GPIO',
 ]
 
 # The rest you shouldn't have to touch too much :)
