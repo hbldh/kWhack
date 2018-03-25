@@ -20,12 +20,21 @@ def run_server(port):
     context = zmq.Context()
     socket = context.socket(zmq.PUB)
     socket.bind("tcp://*:%d" % port)
-    while True:
-        pin, t = ldr.rc_time_edge()
-        if pin == 7 and _last != pin:
-            logger.debug('Send: %r' % t)
-            socket.send_string(str(t))
-        _last = pin
+    try:
+        while True:
+            pin, t = ldr.rc_time_edge()
+            logger.debug("{0}: {1} s ".format(pin, t))
+            if pin == 7 and _last != pin:
+                logger.debug('Send: %r' % t)
+                socket.send_string(str(t))
+            _last = pin
+    except KeyboardInterrupt:
+        logger.info("Received KeyboardInterrupt. Stopping.")
+    except Exception as e:
+        logger.info(
+            "Encountered error: {0}. Stopping.".format(e),
+            exc_info=True
+        )
 
 
 if __name__ == '__main__':

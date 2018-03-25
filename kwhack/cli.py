@@ -11,10 +11,8 @@ import argparse
 import logging
 import pathlib
 
-from kwhack.server import run_server
-from kwhack.client import run_client
-
-logger = logging.getLogger(__name__)
+from kwhack import server
+from kwhack import client
 
 
 def cli_client():
@@ -34,13 +32,13 @@ def cli_client():
                 encoding='utf-8'
             )
         h.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
+        client.logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
             '%(asctime)s %(name)s: %(message)s', datefmt='%Y-%m-%dT%H:%M:%S'
         )
         h.setFormatter(formatter)
-        logger.addHandler(h)
-    run_client(os.environ.get('MONGODB_URI'), args.port)
+        client.logger.addHandler(h)
+    client.run_client(os.environ.get('MONGODB_URI'), args.port)
 
 
 def cli_server():
@@ -60,10 +58,10 @@ def cli_server():
                 encoding='utf-8'
             )
         h.setLevel(logging.DEBUG)
-        logger.setLevel(logging.DEBUG)
+        server.logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
             '%(asctime)s %(name)s: %(message)s', datefmt='%Y-%m-%dT%H:%M:%S'
         )
         h.setFormatter(formatter)
-        logger.addHandler(h)
-    run_server(args.port)
+        server.logger.addHandler(h)
+    server.run_server(args.port)
