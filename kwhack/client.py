@@ -25,7 +25,7 @@ def run_client(mongodb_uri, port):
     loop = asyncio.get_event_loop()
 
     async def store_blink(t):
-        result = await collection.insert_one({'t': time.time(), 'v': int(t)})
+        result = await collection.insert_one({'t': time.time(), 'v': float(t)})
         logger.debug('Inserted %s' % repr(result.inserted_id))
 
     #  Socket to talk to server
