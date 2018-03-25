@@ -14,6 +14,7 @@ class _GPIOMockClass(object):
         self.OUT = 0
         self.PUD_DOWN = 0
         self.PUD_UP = 1
+        self.RISING = 1
 
     def input(self, pin):
         return int(random.random() < 0.01)
@@ -29,6 +30,13 @@ class _GPIOMockClass(object):
 
     def cleanup(self):
         pass
+
+    def wait_for_edge(self, pin, look_for, timeout):
+        value = int(random.random() < 0.2)
+        if value == look_for:
+            return pin, timeout * random.random()
+        else:
+            return pin, timeout
 
 
 GPIO = _GPIOMockClass()

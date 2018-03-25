@@ -23,7 +23,6 @@ def run_server(port):
     try:
         while True:
             pin, t = ldr.rc_time_edge()
-            logger.debug("{0}: {1} s ".format(pin, t))
             if pin == 7 and _last != pin:
                 logger.debug('Send: %r' % t)
                 socket.send_string(str(t))
