@@ -15,15 +15,17 @@ logger = logging.getLogger(__name__)
 
 
 def run_server(port):
-    ldr = LDRMeasurer(7)
+    ldr = LDRMeasurer(7, t_iteration=0.5)
+    _last = None
     context = zmq.Context()
     socket = context.socket(zmq.PUB)
     socket.bind("tcp://*:%d" % port)
     while True:
-        t = ldr.rc_time_with_sleep()
-        if t < 0.03:
+        pin, t = ldr.rc_time_edge()
+        if pin == 7 and _last != pin:
             logger.debug('Send: %r' % t)
             socket.send_string(t)
+        _last = pin
 
 
 if __name__ == '__main__':
