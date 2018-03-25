@@ -30,8 +30,10 @@ def cli_client():
             h = logging.StreamHandler(sys.stdout)
         else:
             h = logging.FileHandler(
-                pathlib.Path(str(args.output).absolute()), encoding='utf-8'
+                str(pathlib.Path(str(args.output)).absolute()),
+                encoding='utf-8'
             )
+        h.setLevel(logging.DEBUG)
         logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
             '%(asctime)s %(name)s: %(message)s', datefmt='%Y-%m-%dT%H:%M:%S'
@@ -54,8 +56,10 @@ def cli_server():
             h = logging.StreamHandler(sys.stdout)
         else:
             h = logging.FileHandler(
-                pathlib.Path(str(args.output).absolute()), encoding='utf-8'
+                str(pathlib.Path(str(args.output)).absolute()),
+                encoding='utf-8'
             )
+        h.setLevel(logging.DEBUG)
         logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
             '%(asctime)s %(name)s: %(message)s', datefmt='%Y-%m-%dT%H:%M:%S'
